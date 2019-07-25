@@ -1,1 +1,42 @@
+1.Let’s first add the relevant GPG key.
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+2.Once we have the trusted key, we can add the repository. Note that if you’re not using 18.04, you can find the relevant repository from the R Project Ubuntu list, named for each release.
+
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+
+3.Now, we’ll need to run update after this in order to include package manifests from the new repository.
+
+sudo apt update
+
+4.If the line above appears in the output from the update command, we’ve successfully added the repository. We can be sure we won’t accidentally install an older version.
+
+At this point, we’re ready to install R with the following command.
+
+sudo apt install r-base
+If prompted to confirm installation, press y to continue.
+
+As of the time of writing, the latest stable version of R from CRAN is 3.5.1, which is displayed when you start R.
+
+5.Since we’re planning to install an example package for every user on the system, we’ll start R as root so that the libraries will be available to all users automatically. Alternatively, if you run the R command without sudo, a personal library can be set up for your user.
+
+sudo -i R
+
+**********************************************************************************************************************************************************************************************************************************************
+1.Download RStudio
+Next, navigate your browser to the official RStudio download page and download the latest Ubuntu/Debian RStudio *.deb package available. 
+
+2.At the time of writing the Ubuntu 18.04 Bionic package is not available yet. If this is still the case download the Ubuntu 16.04 Xenial package instead.
+$ cd Downloads/
+$ ls
+rstudio-xenial-1.1.442-amd64.deb
+ 
+3.Install RStudio on Ubuntu
+At this stage we are ready to install RStudio on our Ubuntu 18.04 system. Run the below gdebi command from the location of your downloaded RStudio package while replacing the package name where appropriate. When prompted, answer y to proceed with the installation:
+$ sudo gdebi rstudio-xenial-1.1.442-amd64.deb
+Once the installation of RStudio on your Ubuntu system is completed you can start RStudio by executing the following linux command:
+
+rstudio
+****************************************************************************************************************************************************************************************************************************************************
 

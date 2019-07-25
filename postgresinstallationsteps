@@ -1,1 +1,94 @@
+1.PostgreSQL publishes deb packages for Ubuntu, and their packages are fresher than those available in OS base repository.
+
+Import the PostgreSQL signing key.
+
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O- | sudo apt-key add -
+
+Add the PostgreSQL repository to /etc/apt/sources.list.d/postgresql.list file.
+
+2.### Ubuntu 18.04 / LinuxMint 19 ###
+
+echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
+
+3.install PostgreSQL
+Execute the below command to update the repository index.
+
+sudo apt-get update
+Install the PostgreSQL package using the apt command.
+
+### PostgreSQL 11 ###
+
+sudo apt-get install -y postgresql-11
+
+
+4.Control PostgreSQL service
+To start PostgreSQL service, run: sudo systemctl start postgresql
+
+To stop PostgreSQL service, run:sudo systemctl stop postgresql
+
+To restart PostgreSQL service, run:sudo systemctl restart postgresql
+
+To check the running status of PostgreSQL service, run:sudo systemctl status postgresql
+
+4.Configure PostgreSQL Server
+PostgreSQL listens on loopback adapter (127.0.0.1) only. Sometimes the application hosted on external may need to connect to the database. For that, we need to configure PostgreSQL to listen on all adaptors.
+
+### PostgreSQL 11 ###
+
+sudo nano /etc/postgresql/11/main/postgresql.conf
+
+### PostgreSQL 10 ###
+
+sudo nano /etc/postgresql/10/main/postgresql.conf
+
+Set the listen_addresses to * or <IPAddress>.
+listen_addresses = '*'
+
+Restart PostgreSQL service.
+sudo systemctl restart postgresql
+
+Confirm the PostgreSQL listening on port 5432 using netstat command.
+sudo netstat -antup | grep 5432
+
+5.Access PostgreSQL
+To manage the database, you need to log in as the postgres user.
+sudo su -l postgres
+Use the psql, an interactive shell for working with PostgreSQL database.
+psql
+
+
+6.Secure PostgreSQL database
+We will now set a password for Linux user (postgres) as well as DB administrator (postgres).
+
+
+Set password for Linux user (postgres)
+sudo passwd postgres
+
+Set password for DB administrator (postgres)
+su - postgres
+
+psql
+On psql shell, run below command to change database admin password.
+
+postgres=# \password
+OR
+
+postgres=# \password postgres
+Output:
+
+
+postgres=# \password postgres
+Enter new password:
+Enter it again:
+PostgreSQL DB Commands
+The syntax for creating a database is:
+
+$ su - postgres
+
+$ createdb test
+Log in to DB.
+
+$ psql test
+
+
 
